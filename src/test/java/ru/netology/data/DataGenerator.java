@@ -32,13 +32,13 @@ public class DataGenerator {
     }
 
     public RegistrationInfo setActiveUser() {
-        RegistrationInfo activeUser = new RegistrationInfo(faker.name().firstName(), faker.internet().password(), "active");
+        RegistrationInfo activeUser = new RegistrationInfo(faker.name().username(), faker.internet().password(), "active");
         setUpUser(activeUser);
         return activeUser;
     }
 
     public RegistrationInfo setBlockedUser() {
-        RegistrationInfo blockedUser = new RegistrationInfo(faker.name().firstName(), faker.internet().password(), "blocked");
+        RegistrationInfo blockedUser = new RegistrationInfo(faker.name().username(), faker.internet().password(), "blocked");
         setUpUser(blockedUser);
         return blockedUser;
     }

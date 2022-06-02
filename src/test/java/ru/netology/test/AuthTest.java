@@ -44,7 +44,7 @@ public class AuthTest {
     @Test
     void shouldUseInvalidLogin() {
         RegistrationInfo activeUser = user.setActiveUser();
-        $("[data-test-id='login'] input").sendKeys(faker.name().firstName());
+        $("[data-test-id='login'] input").sendKeys(faker.name().username());
         $("[data-test-id='password'] input").sendKeys(activeUser.getPassword());
         $("[data-test-id='action-login']").click();
         $("[data-test-id='error-notification'] .notification__content")
