@@ -19,9 +19,9 @@ public class DataGenerator {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
-    private Faker faker = new Faker(new Locale("en"));
+    private static Faker faker = new Faker(new Locale("en"));
 
-    static void setUpUser(RegistrationInfo user) {
+    static void sendRequest(RegistrationInfo user) {
         given()
                 .spec(requestSpec)
                 .body(user)
@@ -31,15 +31,27 @@ public class DataGenerator {
                 .statusCode(200);
     }
 
-    public RegistrationInfo setActiveUser() {
-        RegistrationInfo activeUser = new RegistrationInfo(faker.name().username(), faker.internet().password(), "active");
-        setUpUser(activeUser);
-        return activeUser;
+    public static String getRandomUsername() {
+        return faker.name().username();
     }
 
-    public RegistrationInfo setBlockedUser() {
-        RegistrationInfo blockedUser = new RegistrationInfo(faker.name().username(), faker.internet().password(), "blocked");
-        setUpUser(blockedUser);
-        return blockedUser;
+    public static String getRandomPassword() {
+        return faker.internet().password();
+    }
+
+    public static class Registration {
+        private Registration() {
+        }
+
+        public static RegistrationInfo getUser(String status) {
+            RegistrationInfo user = new RegistrationInfo(getRandomUsername(), getRandomPassword(), status);
+            return user;
+        }
+
+        public static RegistrationInfo getRegisteredUser(String status) {
+            RegistrationInfo registeredUser = getUser(status);
+            sendRequest(registeredUser);
+            return registeredUser;
+        }
     }
 }

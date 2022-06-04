@@ -1,11 +1,9 @@
 package ru.netology.domain;
 
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Value;
 
-@Data
-@RequiredArgsConstructor
+@Value
 public class RegistrationInfo {
     private final String login;
     private final String password;
